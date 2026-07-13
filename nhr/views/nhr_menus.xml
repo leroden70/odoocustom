@@ -1,0 +1,28 @@
+<odoo>
+    <data>
+        <menuitem id="nhr_root_menu"
+                  name="Human Resources"
+                  sequence="5"
+                  web_icon="nhr,static/description/icon.png"/>
+        <menuitem id="nhr_employees_list_menu"
+                  name="Employees"
+                  parent="nhr_root_menu"
+                  action="nhr_employees_action"
+                  sequence="30"/>
+        <menuitem id="nhr_locations_list_menu"
+                  name="Locations"
+                  parent="nhr_root_menu"
+                  action="nhr_locations_action"
+                  sequence="31"/>
+        <menuitem id="nhr_departments_list_menu"
+                  name="Departments"
+                  parent="nhr_root_menu"
+                  action="nhr_departments_action"
+                  sequence="32"/>
+        <menuitem id="nhr_jobs_list_menu"
+                  name="Jobs"
+                  parent="nhr_root_menu"
+                  action="nhr_jobs_action"
+                  sequence="33"/>
+    </data>
+</odoo>

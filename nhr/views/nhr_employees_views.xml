@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="nhr_employees_view_list" model="ir.ui.view">
+        <field name="name">nhr.employees</field>
+        <field name="model">nhr.employees</field>
+        <field name="arch" type="xml">
+            <list string="Employees">
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="email"/>
+                <field name="phone_number"/>
+                <field name="hire_date"/>
+                <field name="job_id"/>
+                <field name="salary"/>
+                <field name="commission_pct"/>
+                <field name="manager_id"/>
+                <field name="department_id"/>
+                <field name="photo"/>
+                <field name="photo_binary"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nhr_employees_view_form" model="ir.ui.view">
+        <field name="name">nhr.employees</field>
+        <field name="model">nhr.employees</field>
+        <field name="arch" type="xml">
+            <form string="Employee">
+                <sheet>
+                    <group>
+                        <field name="first_name"/>
+                        <field name="last_name"/>
+                        <field name="email"/>
+                        <field name="phone_number"/>
+                        <field name="hire_date"/>
+                        <field name="job_id"/>
+                    </group>
+                    <group>
+                        <field name="salary"/>
+                        <field name="commission_pct"/>
+                        <field name="manager_id"/>
+                        <field name="department_id"/>
+                        <field name="photo"/>
+                        <field name="photo_binary"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nhr_employees_action" model="ir.actions.act_window">
+        <field name="name">Employees</field>
+        <field name="res_model">nhr.employees</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

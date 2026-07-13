@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_nhr_employees,access_nhr_employees,model_nhr_employees,base.group_user,1,1,1,1
+access_nhr_absence_types,access_nhr_absence_types,model_nhr_absence_types,base.group_user,1,1,1,1
+access_nhr_absences,access_nhr_absences,model_nhr_absences,base.group_user,1,1,1,1
+access_nhr_departments,access_nhr_departments,model_nhr_departments,base.group_user,1,1,1,1
+access_nhr_ent_holidays,access_nhr_ent_holidays,model_nhr_ent_holidays,base.group_user,1,1,1,1
+access_nhr_job_history,access_nhr_job_history,model_nhr_job_history,base.group_user,1,1,1,1
+access_nhr_jobs,access_nhr_jobs,model_nhr_jobs,base.group_user,1,1,1,1
+access_nhr_locations,access_nhr_locations,model_nhr_locations,base.group_user,1,1,1,1
+access_nhr_public_holidays,access_nhr_public_holidays,model_nhr_public_holidays,base.group_user,1,1,1,1
+access_nhr_regions,access_nhr_regions,model_nhr_regions,base.group_user,1,1,1,1

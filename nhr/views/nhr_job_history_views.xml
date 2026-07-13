@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="nhr_job_history_view_list" model="ir.ui.view">
+        <field name="name">nhr.job_history</field>
+        <field name="model">nhr.job_history</field>
+        <field name="arch" type="xml">
+            <list string="Job History">
+                <field name="employee_id"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="job_id"/>
+                <field name="department_id"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="nhr_job_history_view_form" model="ir.ui.view">
+        <field name="name">nhr.job_history</field>
+        <field name="model">nhr.job_history</field>
+        <field name="arch" type="xml">
+            <form string="Job History">
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="job_id"/>
+                        <field name="department_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nhr_job_history_action" model="ir.actions.act_window">
+        <field name="name">Entitlemnet to holidays</field>
+        <field name="res_model">nhr.job_history</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
