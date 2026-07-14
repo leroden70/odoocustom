@@ -11,5 +11,5 @@ class NhrEntHolidays(models.Model):
     absence_type = fields.Many2one('nhr.absence_types', string="Absence Type", required=True)
     description = fields.Char(string="Description")
     start_date = fields.Date('Start Date', required=True)
-    estimated_end_date = fields.Date('End Date', required=True)
+    estimated_end_date = fields.Date('Estimated End Date', required=True)
     end_date = fields.Date('End Date')

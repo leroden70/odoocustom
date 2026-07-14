@@ -1,10 +1,10 @@
 {
     'name': "estate",
 
-    'summary': "This module does nothing but does it again",
+    'summary': "Real Estate Application",
 
     'description': """
-This module does nothing another time and there is not much more to say about it.
+
     """,
 
     'author': "Denis",

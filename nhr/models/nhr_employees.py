@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-# from hr_fleet.models import employee
 from odoo import fields, models, api
 import requests
 import base64
@@ -8,10 +5,11 @@ import base64
 class NhrEmployees(models.Model):
     _name = 'nhr.employees'
     _description = "Employees"
-    _rec_name = 'last_name'
+    _rec_name = 'full_name'
 
     first_name = fields.Char('First Name', required=True)
     last_name = fields.Char('Last Name', required=True)
+    full_name = fields.Char("Full Name", compute="_compute_full_name")
     email = fields.Char('e-mail', required=True)
     phone_number = fields.Char('Phone Number', required=True)
     hire_date = fields.Date('Hire Date', required=True)
@@ -20,7 +18,7 @@ class NhrEmployees(models.Model):
     commission_pct = fields.Float('Commission Percentage')
     manager_id = fields.Many2one('nhr.employees', string="Manager")
     department_id = fields.Many2one('nhr.departments', string='Department')
-    photo = fields.Char('Photo')
+    photo = fields.Char('Photo File')
     photo_binary = fields.Binary(string='Photo', compute='_compute_photo_binary')
 
     @api.depends('photo')
@@ -28,7 +26,10 @@ class NhrEmployees(models.Model):
         for record in self:
             if record.photo:
                 try:
-                    response = requests.get(record.photo, timeout=10)
+                    base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
+                    url = f"{base_url}{record.photo}"
+                    print(url)
+                    response = requests.get(url, timeout=10)
                     if response.status_code == 200:
                         record.photo_binary = base64.b64encode(response.content)
                     else:
@@ -39,9 +40,6 @@ class NhrEmployees(models.Model):
                 record.photo_binary = False
 
     @api.depends('first_name', 'last_name')
-    def _compute_display_name(self):
+    def _compute_full_name(self):
         for record in self:
-            first = record.first_name or ''
-            last = record.last_name or ''
-            full_name = f"{first} {last}".strip()
-            record.display_name = full_name or f"Employee #{record.id}"
+            record.full_name = f"{record.first_name} {record.last_name}".strip()

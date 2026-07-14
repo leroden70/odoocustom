@@ -1,12 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="nhr_employees_view_list" model="ir.ui.view">
-        <field name="name">nhr.employees</field>
+
+    <record id="nhr.employees_view_search" model="ir.ui.view">
+        <field name="name">nhr.employees.search</field>
         <field name="model">nhr.employees</field>
         <field name="arch" type="xml">
-            <list string="Employees">
+            <search>
                 <field name="first_name"/>
                 <field name="last_name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="nhr_employees_view_form_v2" model="ir.ui.view">
+        <field name="name">nhr.employees.form</field>
+        <field name="model">nhr.employees</field>
+        <field name="arch" type="xml">
+            <form string="Employee">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="full_name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="email"/>
+                            <field name="phone_number"/>
+                            <field name="hire_date"/>
+                            <field name="job_id"/>
+                            <field name="photo"/>
+                        </group>
+                        <group>
+                            <field name="salary"/>
+                            <field name="commission_pct"/>
+                            <field name="manager_id"/>
+                            <field name="department_id"/>
+                            <field name="photo_binary"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="nhr_employees_view_list_v2" model="ir.ui.view">
+        <field name="name">nhr.employees.list</field>
+        <field name="model">nhr.employees</field>
+        <field name="arch" type="xml">
+            <list string="Employees" class="o_list_table_auto">
+                <field name="full_name"/>
                 <field name="email"/>
                 <field name="phone_number"/>
                 <field name="hire_date"/>
@@ -15,36 +58,7 @@
                 <field name="commission_pct"/>
                 <field name="manager_id"/>
                 <field name="department_id"/>
-                <field name="photo"/>
-                <field name="photo_binary"/>
             </list>
-        </field>
-    </record>
-
-    <record id="nhr_employees_view_form" model="ir.ui.view">
-        <field name="name">nhr.employees</field>
-        <field name="model">nhr.employees</field>
-        <field name="arch" type="xml">
-            <form string="Employee">
-                <sheet>
-                    <group>
-                        <field name="first_name"/>
-                        <field name="last_name"/>
-                        <field name="email"/>
-                        <field name="phone_number"/>
-                        <field name="hire_date"/>
-                        <field name="job_id"/>
-                    </group>
-                    <group>
-                        <field name="salary"/>
-                        <field name="commission_pct"/>
-                        <field name="manager_id"/>
-                        <field name="department_id"/>
-                        <field name="photo"/>
-                        <field name="photo_binary"/>
-                    </group>
-                </sheet>
-            </form>
         </field>
     </record>
 
