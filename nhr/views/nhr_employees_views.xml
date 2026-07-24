@@ -18,27 +18,73 @@
         <field name="arch" type="xml">
             <form string="Employee">
                 <sheet>
-                    <div class="oe_title">
-                        <h1>
-                            <field name="full_name"/>
-                        </h1>
-                    </div>
+<!--                    <group>-->
+<!--                        <field name="photo" widget="image" class="oe_avatar"-->
+<!--                               options="{'size': [120, 120]}" nolabel="1"/>-->
+<!--                    </group>-->
+                    <group>
+                        <field name="photo" widget="image" class="rounded float-start img-thumbnail"
+                               options="{'size': [150, 150]}" nolabel="1"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="full_name"/>
+                            </h1>
+                        </div>
+                    </group>
                     <group>
                         <group>
+                            <field name="first_name"/>
+                            <field name="last_name"/>
                             <field name="email"/>
                             <field name="phone_number"/>
                             <field name="hire_date"/>
-                            <field name="job_id"/>
-                            <field name="photo"/>
                         </group>
                         <group>
+                            <field name="job_id"/>
                             <field name="salary"/>
                             <field name="commission_pct"/>
                             <field name="manager_id"/>
                             <field name="department_id"/>
-                            <field name="photo_binary"/>
                         </group>
                     </group>
+                    <notebook>
+                        <page string="Job History">
+                            <group>
+                                <field name="job_history_id"/>
+                            </group>
+                        </page>
+                        <page string="Holidays">
+                            <group>
+                                <field name="absences_id"/>
+                            </group>
+                        </page>
+                        <page string="Entitlement to holidays">
+                            <group>
+                                <field name="ent_holidays_id"/>
+                            </group>
+                        </page>
+                        <page string="Management Hierarchy">
+                            <group>
+                                <h2>Management Hierarchy</h2>
+                                <field name="hierarchy_string"
+                                       readonly="1"
+                                       widget="html"
+                                       nolabel="1"
+                                       style="font-family: monospace; white-space: pre-wrap; background-color: #f8f9fa; padding: 10px; border-radius: 4px;"/>
+                            </group>
+                        </page>
+                        <page string="Subordinates Chain">
+                            <group>
+                                <h2>Subordinates Chain</h2>
+                                <field name="subordinates_string"
+                                       readonly="1"
+                                       widget="html"
+                                       nolabel="1"
+                                       style="font-family: monospace; white-space: pre-wrap; background-color: #f8f9fa; padding: 10px; border-radius: 4px;"/>
+                            </group>
+                        </page>
+                    </notebook>
+
                 </sheet>
             </form>
         </field>
@@ -48,7 +94,7 @@
         <field name="name">nhr.employees.list</field>
         <field name="model">nhr.employees</field>
         <field name="arch" type="xml">
-            <list string="Employees" class="o_list_table_auto">
+            <list string="Employees" class="o_list_table_auto" limit="20">
                 <field name="full_name"/>
                 <field name="email"/>
                 <field name="phone_number"/>

@@ -8,6 +8,7 @@ class NhrLocations(models.Model):
     _description = "Locations"
 
     
+    active = fields.Boolean('Active', default=True)
     street_address = fields.Char('Street Address', required=True)
     postal_code = fields.Char('Postal Code', required=True)
     city = fields.Char('City', required=True)

@@ -7,6 +7,7 @@ class NhrJobHistory(models.Model):
     _name = 'nhr.job_history'
     _description = "Job History"
 
+    active = fields.Boolean('Active', default=True)
     employee_id = fields.Many2one('nhr.employees', string="Employee")
     start_date = fields.Date('Start Date')
     end_date = fields.Date('End Date')

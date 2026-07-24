@@ -7,4 +7,5 @@ class NhrRegions(models.Model):
     _name = 'nhr.regions'
     _description = "Regions"
 
+    active = fields.Boolean('Active', default=True)
     name = fields.Char('Region Name', required=True)

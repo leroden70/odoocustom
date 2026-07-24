@@ -7,6 +7,7 @@ class NhrEntHolidays(models.Model):
     _name = 'nhr.absences'
     _description = "Entitlement to Holidays"
 
+    active = fields.Boolean('Active', default=True)
     employee_id = fields.Many2one('nhr.employees', string="Employee", required=True)
     absence_type = fields.Many2one('nhr.absence_types', string="Absence Type", required=True)
     description = fields.Char(string="Description")

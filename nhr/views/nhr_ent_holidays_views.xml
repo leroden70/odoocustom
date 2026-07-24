@@ -5,7 +5,7 @@
         <field name="model">nhr.ent_holidays</field>
         <field name="arch" type="xml">
             <list string="Entitlement to holidays">
-                <field name="employee_id"/>
+<!--                <field name="employee_id"/>-->
                 <field name="absence_type"/>
                 <field name="start_date"/>
                 <field name="end_date"/>

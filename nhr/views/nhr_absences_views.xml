@@ -5,7 +5,7 @@
         <field name="model">nhr.absences</field>
         <field name="arch" type="xml">
             <list string="Property Tags">
-                <field name="employee_id"/>
+<!--                <field name="employee_id"/>-->
                 <field name="absence_type"/>
                 <field name="description"/>
                 <field name="start_date"/>

@@ -24,5 +24,19 @@
                   parent="nhr_root_menu"
                   action="nhr_jobs_action"
                   sequence="33"/>
+        <menuitem id="nhr_general_menu"
+                  name="General"
+                  parent="nhr_root_menu"
+                  sequence="34"/>
+        <menuitem id="nhr_absence_types_menu"
+                  name="Absence_types"
+                  parent="nhr_general_menu"
+                  action="nhr_absence_types_action"
+                  sequence="35"/>
+        <menuitem id="nhr_public_holidays_menu"
+                  name="Public Holidays"
+                  parent="nhr_general_menu"
+                  action="nhr_public_holidays_action"
+                  sequence="36"/>
     </data>
 </odoo>

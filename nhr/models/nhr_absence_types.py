@@ -6,7 +6,9 @@ from odoo.tools import date_utils
 class NhrAbsenceTypes(models.Model):
     _name = 'nhr.absence_types'
     _description = "Absence Types"
+    _rec_name = 'absence_type'
 
+    active = fields.Boolean('Active', default=True)
     absence_type = fields.Char(string="Absence Type", required=True)
     absence_description = fields.Char(string="Description")
 

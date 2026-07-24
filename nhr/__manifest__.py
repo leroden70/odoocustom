@@ -23,7 +23,6 @@ To manage employees, jobs, departments, absences, etc.
     'data': [
         # 'security/ir.model.access.csv',
         'security/ir.model.access.csv',
-        'views/views.xml',
         'views/nhr_employees_views.xml',
         'views/nhr_absence_types_views.xml',
         'views/nhr_absences_views.xml',
@@ -40,6 +39,11 @@ To manage employees, jobs, departments, absences, etc.
     'demo': [
         'demo/demo.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'nhr/static/src/css/nhr_hierarchy.css',
+        ],
+    },
     'license': 'LGPL-3',
     'installable': True,
     'application': True,

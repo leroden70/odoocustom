@@ -1,0 +1,38 @@
+.oe_hierarchy_tree {
+    list-style-type: none;
+    padding-left: 20px;
+}
+.oe_hierarchy_tree ul.nested {
+    display: none;
+    margin-left: 15px;
+    padding-left: 10px;
+    list-style-type: none;
+}
+.oe_hierarchy_tree ul.nested.active {
+    display: block;
+}
+.oe_hierarchy_tree .caret {
+    cursor: pointer;
+    display: inline-block;
+    width: 12px;
+    margin-right: 4px;
+    user-select: none;
+    color: #555;
+}
+.oe_hierarchy_tree .caret::before {
+    content: "▶";
+}
+.oe_hierarchy_tree .caret.caret-down::before {
+    content: "▼";
+}
+.oe_hierarchy_tree li {
+    white-space: nowrap;
+}
+.oe_hierarchy_tree .listname {
+    cursor: pointer;
+    margin-left: 2px;
+}
+.oe_hierarchy_tree .listname a:hover {
+    color: #0066cc;
+}
+
