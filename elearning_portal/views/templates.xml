@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="formations_page" name="Liste locale des formations">
+        <t t-call="website.layout">
+            <div id="wrap" class="oe_structure">
+                <main class="container py-5">
+                    <nav aria-label="Navigation des formations" class="mb-4">
+                        <a href="/formations">Toutes les formations</a>
+                    </nav>
+
+                    <header class="mb-4">
+                        <p class="text-muted">Sélection locale</p>
+                        <h1>Formations disponibles</h1>
+                        <p>Ces formations fictives servent uniquement à l’exercice.</p>
+                    </header>
+
+                    <section aria-labelledby="selection-title">
+                        <h2 id="selection-title" class="h3">Choisissez une formation</h2>
+                        <p t-if="not modules" class="alert alert-info" role="status">
+                            Aucune formation d’exercice n’est disponible.
+                        </p>
+                        <div t-if="modules" class="row g-3">
+                            <div class="col-12 col-md-6"
+                                 t-foreach="modules" t-as="module">
+                                <article class="h-100 p-3 border rounded">
+                                    <h3 class="h5">
+                                        <t t-out="module.name"/>
+                                    </h3>
+                                    <p t-if="module.description">
+                                        <t t-out="module.description"/>
+                                    </p>
+                                    <a class="btn btn-outline-primary mt-3"
+                                       t-att-href="'/odoo/action-elearning_portal.elearning_module_action/%s' % module.id">
+                                        Ouvrir la fiche interne
+                                    </a>
+                                </article>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </t>
+    </template>
+</odoo>

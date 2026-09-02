@@ -4,6 +4,7 @@ from markupsafe import Markup
 from odoo import fields, models, api
 import requests
 import base64
+from datetime import timedelta
 
 from odoo.orm.types import ValuesType
 
@@ -118,16 +119,24 @@ class NhrEmployees(models.Model):
 
     def _create_job_history_record(self, old_job_id, old_department_id):
         self.ensure_one()
+        today = fields.Date.context_today(self)
+
+        # Chercher le dernier historique enregistré (le plus récent par end_date)
         last_history = self.env['nhr.job_history'].search([
             ('employee_id', '=', self.id),
-            ('end_date', '=', False),
-        ], limit=1)
+        ], order='end_date desc', limit=1)
+
         if last_history:
-            last_history.write({'end_date': fields.Date.context_today(self)})
+            # start_date = last_history.end_date + timedelta(days=1)
+            start_date = last_history.end_date
+        else:
+            # Premier changement : pas d'historique précédent, on part de la date d'embauche
+            start_date = self.hire_date
 
         self.env['nhr.job_history'].create({
             "employee_id": self.id,
-            "job_id": self.job_id.id,
-            "department_id": self.department_id.id,
-            "start_date": fields.Date.context_today(self),
+            "job_id": old_job_id,
+            "department_id": old_department_id,
+            "start_date": start_date,
+            "end_date": today,
         })

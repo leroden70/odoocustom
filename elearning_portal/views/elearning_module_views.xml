@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="elearning_module_view_list" model="ir.ui.view">
+        <field name="name">elearning.module.list</field>
+        <field name="model">elearning.module</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name" />
+                <field name="note_ids" />
+            </list>
+        </field>
+    </record>
+
+    <record id="elearning_module_view_form" model="ir.ui.view">
+        <field name="name">elearning.module.form</field>
+        <field name="model">elearning.module</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                        <field name="description" />
+                    </group>
+                    <notebook>
+                        <page string="Notes associées">
+                            <field name="note_ids">
+                                <list>
+                                    <field name="title" />
+                                    <field name="category_id" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="elearning_module_action" model="ir.actions.act_window">
+        <field name="name">Formations</field>
+        <field name="res_model">elearning.module</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="elearning_portal_menu_root"
+        name="Portail de formations" sequence="40" />
+    <menuitem id="elearning_module_menu"
+        name="Formations" parent="elearning_portal_menu_root"
+        action="elearning_module_action" sequence="10" />
+</odoo>

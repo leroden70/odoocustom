@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="elearning_module_odoo_basics" model="elearning.module">
+        <field name="name">Bases du développement Odoo</field>
+        <field name="description">Comprendre un model, ses données et sa mise à niveau.</field>
+        <field name="note_ids"
+               search="[('id', 'in', [
+                   ref('training_hello.training_note_welcome'),
+                   ref('training_hello.training_note_observe'),
+               ])]"/>
+    </record>
+
+    <record id="elearning_module_safe_practice" model="elearning.module">
+        <field name="name">Pratiquer dans une base d’exercice</field>
+        <field name="description">Tester les changements sans utiliser de données réelles.</field>
+        <field name="note_ids"
+               search="[('id', 'in', [
+                   ref('training_hello.training_note_test'),
+               ])]"/>
+    </record>
+</odoo>
