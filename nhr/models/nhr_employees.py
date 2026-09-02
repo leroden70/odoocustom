@@ -1,7 +1,12 @@
+import typing
+
 from markupsafe import Markup
 from odoo import fields, models, api
 import requests
 import base64
+
+from odoo.orm.types import ValuesType
+
 
 class NhrEmployees(models.Model):
     _name = 'nhr.employees'
@@ -61,7 +66,7 @@ class NhrEmployees(models.Model):
         action = self.env.ref('nhr.nhr_employees_action')
         for employee in self:
             employee.subordinates_string = Markup(
-                '<ul class="oe_hierarchy_tree">{}</ul>'
+                '<ul class="oe_hierarchy_tree" style="position:relative;">{}</ul>'
             ).format(employee._build_hierarchy_li('down', 0, action))
 
     def _build_hierarchy_li(self, direction, level, action):
@@ -81,8 +86,8 @@ class NhrEmployees(models.Model):
             html += Markup('reports to ')
 
         url = f"/odoo/action-{action.id}/{self.id}"
-        html += Markup('<span class="listname"><a href="{}">{}</a></span>').format(
-            url, self.full_name
+        html += Markup('<span class="listname"><a href="{}">{}<span style="font-size:75%;"> -- {} -- {}</span></a></span>').format(
+            url, self.full_name, self.job_id.job_title , self.department_id.department_name
         )
 
         if related:
@@ -93,26 +98,36 @@ class NhrEmployees(models.Model):
 
         html += Markup('</li>')
         return html
-    # @api.depends('photo')
-    # def _compute_photo_binary(self):
-    #     for record in self:
-    #         if record.photo:
-    #             try:
-    #                 base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
-    #                 url = f"{base_url}{record.photo}"
-    #                 print(url)
-    #                 response = requests.get(url, timeout=10)
-    #                 if response.status_code == 200:
-    #                     record.photo_binary = base64.b64encode(response.content)
-    #                 else:
-    #                     record.photo_binary = False
-    #             except Exception:
-    #                 record.photo_binary = False
-    #         else:
-    #             record.photo_binary = False
 
     @api.depends('first_name', 'last_name')
     def _compute_full_name(self):
         for record in self:
             record.full_name = f"{record.first_name} {record.last_name}".strip()
 
+    def write(self, vals: ValuesType) -> typing.Literal[True]:
+        tracked_fields = {"job_id", "department_id"}
+        if tracked_fields.intersection(vals.keys()):
+            old_values = {emp.id: (emp.job_id.id, emp.department_id.id) for emp in self}
+            result = super().write(vals)
+            for emp in self:
+                old_job_id, old_department_id = old_values[emp.id]
+                if old_job_id != emp.job_id.id or old_department_id != emp.department_id.id:
+                    emp._create_job_history_record(old_job_id, old_department_id)
+            return result
+        return super().write(vals)
+
+    def _create_job_history_record(self, old_job_id, old_department_id):
+        self.ensure_one()
+        last_history = self.env['nhr.job_history'].search([
+            ('employee_id', '=', self.id),
+            ('end_date', '=', False),
+        ], limit=1)
+        if last_history:
+            last_history.write({'end_date': fields.Date.context_today(self)})
+
+        self.env['nhr.job_history'].create({
+            "employee_id": self.id,
+            "job_id": self.job_id.id,
+            "department_id": self.department_id.id,
+            "start_date": fields.Date.context_today(self),
+        })

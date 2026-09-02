@@ -34,6 +34,7 @@ To manage employees, jobs, departments, absences, etc.
         'views/nhr_public_holidays_views.xml',
         'views/nhr_regions_views.xml',
         'views/nhr_menus.xml',
+        # 'data/nhr_public_holidays_data.csv'
     ],
     # only loaded in demonstration mode
     'demo': [

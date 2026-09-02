@@ -2,7 +2,7 @@
     <data>
         <menuitem id="nhr_root_menu"
                   name="Human Resources"
-                  sequence="5"
+                  sequence="4"
                   web_icon="nhr,static/description/icon.png"/>
         <menuitem id="nhr_employees_list_menu"
                   name="Employees"
@@ -38,5 +38,10 @@
                   parent="nhr_general_menu"
                   action="nhr_public_holidays_action"
                   sequence="36"/>
+        <menuitem id="nhr_regions_menu"
+                  name="Regions"
+                  parent="nhr_general_menu"
+                  action="nhr_regions_action"
+                  sequence="37"/>
     </data>
 </odoo>

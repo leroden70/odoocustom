@@ -3,7 +3,7 @@ from odoo.tools import date_utils
 
 class NhrPublicHolidays(models.Model):
     _name = 'nhr.public_holidays'
-    _description = "Public Holidayss"
+    _description = "Public Holidays"
 
     active = fields.Boolean('Active', default=True)
     country_id = fields.Many2one('res.country', string="Country", index=True)

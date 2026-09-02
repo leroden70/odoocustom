@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="training_hello.HelloWorld">
+        <div class="o_action p-4">
+            <h1>Hello Odoo</h1>
+            <p>Votre premier module est bien ouvert.</p>
+            <button type="button"
+                    class="btn btn-primary"
+                    t-on-click="sayHello">
+                Well, hello Odoo
+            </button>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="training_note_welcome" model="training.note">
+        <field name="title">Bienvenue</field>
+        <field name="body">Une note est un enregistrement stocké par Odoo.</field>
+    </record>
+    <record id="training_note_observe" model="training.note">
+        <field name="title">Observer avant de modifier</field>
+        <field name="body">La mise à niveau est le moment où Odoo applique les fichiers du module.</field>
+    </record>
+    <record id="training_note_test" model="training.note">
+        <field name="title">Une base d'exercice</field>
+        <field name="body">Nous pouvons y apprendre sans toucher à des données réelles.</field>
+    </record>
+</odoo>

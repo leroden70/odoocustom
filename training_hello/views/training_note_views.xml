@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="training_note_category_view_list" model="ir.ui.view">
+            <field name="name">training.note.category.list</field>
+            <field name="model">training.note.category</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="training_note_category_view_form" model="ir.ui.view">
+            <field name="name">training.note.category.form</field>
+            <field name="model">training.note.category</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="training_note_view_list" model="ir.ui.view">
+            <field name="name">training.note.list</field>
+            <field name="model">training.note</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="title"/>
+                    <field name="category_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="training_note_view_form" model="ir.ui.view">
+            <field name="name">training.note.form</field>
+            <field name="model">training.note</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="title"/>
+                            <field name="category_id"/>
+                            <field name="body"/>
+                            <field name="priority"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="training_note_action" model="ir.actions.act_window">
+            <field name="name">Notes</field>
+            <field name="res_model">training.note</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <record id="training_note_category_action" model="ir.actions.act_window">
+            <field name="name">Catégories</field>
+            <field name="res_model">training.note.category</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+        <menuitem id="training_note_menu_root"
+                  name="Notes de formation"
+                  parent="training_hello_menu_root2"
+                  sequence="30"/>
+
+        <menuitem id="training_note_menu"
+                  name="Notes"
+                  parent="training_note_menu_root"
+                  action="training_note_action"
+                  sequence="10"/>
+
+        <menuitem id="training_note_category_menu"
+                  name="Catégories"
+                  parent="training_note_menu_root"
+                  action="training_note_category_action"
+                  sequence="20"/>
+    </data>
+</odoo>

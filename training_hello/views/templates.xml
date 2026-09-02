@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="training_tags_page">
+        <html>
+            <head>
+                <title>Training tags</title>
+                <link rel="stylesheet"
+                      href="/training_hello/static/src/css/training_tags.css"/>
+            </head>
+            <body class="training-tags-page">
+                <main class="training-tags-card">
+                    <h1>Training tags</h1>
+                    <ul class="training-tags-list">
+                        <li t-foreach="tags" t-as="tag">
+                            <t t-out="tag.name"/>
+                        </li>
+                    </ul>
+                </main>
+            </body>
+        </html>
+    </template>
+</odoo>

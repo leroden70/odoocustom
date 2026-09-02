@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="partner_category_student"
+            model="res.partner.category">
+        <field name="name">Formation · Étudiant</field>
+        <field name="color">4</field>
+    </record>
+
+    <record id="partner_category_teacher"
+            model="res.partner.category">
+        <field name="name">Formation · Formateur</field>
+        <field name="color">2</field>
+    </record>
+</odoo>

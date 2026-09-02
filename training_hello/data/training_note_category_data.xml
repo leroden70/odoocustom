@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <record id="training_note_category_meeting" model="training.note.category">
+        <field name="name">Réunion</field>
+    </record>
+    <record id="training_note_category_idea" model="training.note.category">
+        <field name="name">Idée</field>
+    </record>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_training_note,training.note,model_training_note,base.group_user,1,1,1,1
+access_training_note_category,training.note.category,model_training_note_category,base.group_user,1,1,1,1
+access_training_note_user,training.note user,model_training_note,base.group_user,1,1,1,1
+access_training_note_category_user,training.note.category user,model_training_note_category,base.group_user,1,1,1,1
