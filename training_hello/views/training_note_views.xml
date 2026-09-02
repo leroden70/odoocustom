@@ -81,5 +81,17 @@
                   parent="training_note_menu_root"
                   action="training_note_category_action"
                   sequence="20"/>
+
+        <record id="training_notes_client_action" model="ir.actions.client">
+            <field name="name">Notes Owl</field>
+            <field name="tag">training_hello.training_notes</field>
+        </record>
+
+        <menuitem id="training_notes_owl_menu"
+                  name="Notes Owl"
+                  parent="training_note_menu_root"
+                  action="training_notes_client_action"
+                  sequence="30"/>
+
     </data>
 </odoo>

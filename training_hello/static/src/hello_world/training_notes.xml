@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+  <t t-name="training_hello.TrainingNotes">
+    <div class="o_action p-4">
+      <h1>Notes de formation</h1>
+      <form t-on-submit.prevent="createNote">
+        <label>Titre <input t-model="state.title" required="required"/></label>
+        <label>Contenu <textarea t-model="state.body"></textarea></label>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </form>
+      <ul>
+        <li t-foreach="state.notes" t-as="note" t-key="note.id">
+          <strong t-esc="note.title"/>
+            <p t-esc="note.body"/>
+        </li>
+      </ul>
+    </div>
+  </t>
+</templates>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="training_notes_page">
+        <h1>Notes de formation</h1>
+        <form action="/training/notes" method="post">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <label>Titre <input name="title" required="required"/></label>
+            <label>Contenu <textarea name="body"></textarea> </label>
+            <button type="submit">Enregistrer</button>
+        </form>
+        <ul>
+            <li t-foreach="notes" t-as="note">
+                <strong><t t-out="note.title"/></strong>
+                <p><t t-out="note.body"/></p>
+            </li>
+        </ul>
+    </template>
+</odoo>
