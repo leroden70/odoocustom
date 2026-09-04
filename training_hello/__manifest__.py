@@ -7,7 +7,8 @@
     "license": "LGPL-3",
     "depends": ["web", "contacts"],
     "data": [
-        'security/ir.model.access.csv',
+        "security/training_notes_groups.xml",
+        "security/ir.model.access.csv",
         "data/partner_category_data.xml",
         "views/partner_category_list.xml",
         "views/training_note_views.xml",
