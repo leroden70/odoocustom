@@ -121,7 +121,6 @@ class NhrEmployees(models.Model):
         self.ensure_one()
         today = fields.Date.context_today(self)
 
-        # Chercher le dernier historique enregistré (le plus récent par end_date)
         last_history = self.env['nhr.job_history'].search([
             ('employee_id', '=', self.id),
         ], order='end_date desc', limit=1)
@@ -130,7 +129,6 @@ class NhrEmployees(models.Model):
             # start_date = last_history.end_date + timedelta(days=1)
             start_date = last_history.end_date
         else:
-            # Premier changement : pas d'historique précédent, on part de la date d'embauche
             start_date = self.hire_date
 
         self.env['nhr.job_history'].create({
