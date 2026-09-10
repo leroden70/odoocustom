@@ -77,7 +77,8 @@ class NhrAbsences(models.Model):
 
     def unlink(self):
         for record in self:
-            self._update_ent_holidays(record, record.duration)
+            # self._update_ent_holidays(record, record.duration)
+            raise ValidationError("My Exception")
         result = super().unlink()
         return result
 
@@ -105,7 +106,7 @@ class NhrAbsences(models.Model):
     def _calculate_duration(self, start_date, end_date):
         base_duration = end_date - start_date + relativedelta(days=1)
         current_date = start_date
-        public_holidays = self.env['nhr.nhr_public_holidays'].search([
+        public_holidays = self.env['nhr.public_holidays'].search([
             ('country_id', '=', self.employee_id.department_id.location_id.country_id.id),
         ])
         holiday_dates = public_holidays.mapped('holiday_date')

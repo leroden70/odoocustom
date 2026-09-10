@@ -4,7 +4,7 @@
         <field name="name">nhr.job_history</field>
         <field name="model">nhr.job_history</field>
         <field name="arch" type="xml">
-            <list string="Job History">
+            <list string="Job History" delete="false">
                 <field name="employee_id"/>
                 <field name="start_date"/>
                 <field name="end_date"/>

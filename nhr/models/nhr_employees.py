@@ -2,6 +2,7 @@ import typing
 
 from markupsafe import Markup
 from odoo import fields, models, api
+from odoo.exceptions import ValidationError
 import requests
 import base64
 from datetime import timedelta
@@ -44,6 +45,12 @@ class NhrEmployees(models.Model):
         compute="_compute_subordinates_string",
         sanitize=False,
     )
+
+    @api.constrains('salary', 'job_id.min_salary', 'job_id.max_salary')
+    def _check_salary(self):
+        for record in self:
+            if record.salary < record.job_id.min_salary or record.salary > record.job_id.max_salary:
+                raise ValidationError("The salary must be between the min and max salaries defined for the job.")
 
     @api.depends(
         'full_name', 'manager_id', 'manager_id.manager_id',
