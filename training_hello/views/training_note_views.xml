@@ -74,7 +74,7 @@
                   name="Notes"
                   parent="training_note_menu_root"
                   action="training_note_action"
-                  sequence="10"/>
+                  sequence="50"/>
 
         <menuitem id="training_note_category_menu"
                   name="Catégories"

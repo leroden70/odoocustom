@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <menuitem id="newhr_root_menu"
+                  name="New Human Resources"
+                  sequence="1"/>
+        <menuitem id="newhr_general_menu"
+                  name="General"
+                  parent="newhr_root_menu"
+                  sequence="34"/>
+        <menuitem id="newhr_regions_menu"
+                  name="Regions"
+                  parent="newhr_general_menu"
+                  action="newhr_regions_action"
+                  sequence="37"/>
+    </data>
+</odoo>

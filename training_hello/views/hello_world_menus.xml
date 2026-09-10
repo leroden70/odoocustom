@@ -13,7 +13,7 @@
         <menuitem id="training_hello_menu_root2"
                   name="Hello Again"
                   action="training_hello_action"
-                  sequence="2"
+                  sequence="20"
                   web_icon="nhr,static/description/icon.png"/>
     </data>
 </odoo>
