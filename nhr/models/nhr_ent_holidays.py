@@ -15,6 +15,15 @@ class NhrEntHolidays(models.Model):
     absence_type = fields.Many2one('nhr.absence_types', string="Absence Type", required=True)
     start_date = fields.Date('Start Date', required=True)
     # end_date = fields.Date(string="Expiration", default=lambda self: date(9999, 12, 31), required=True)
-    end_date = fields.Date(string="Expiration", required=True)
-    entitlement = fields.Integer(string="Entitlement", default=datetime.strptime("9999-12-31", '%Y-%m-%d').date(), required=True)
+    end_date = fields.Date(string="Expiration", default=datetime.strptime("9999-12-31", '%Y-%m-%d').date(), required=True)
+    entitlement = fields.Integer(string="Entitlement", default=0, required=True)
     balance = fields.Integer(string="Balance", required=True)
+
+    @api.onchange('entitlement')
+    def _onchange_entitlement(self):
+        for record in self:
+            entitlement_old_value = record._origin.entitlement
+            balance_old_value = record._origin.balance
+            entitlement_new_value = record.entitlement
+            if entitlement_old_value != entitlement_new_value:
+                record.balance = balance_old_value + (entitlement_new_value - entitlement_old_value)
