@@ -1,0 +1,133 @@
+from markupsafe import Markup
+from odoo import fields, models, api
+from odoo.exceptions import ValidationError
+from odoo.orm.types import ValuesType
+import typing
+
+
+class NewhrEmployees(models.Model):
+    _name = 'newhr.employees'
+    _description = 'Employees'
+    _rec_name = 'full_name'
+
+    active = fields.Boolean('Active', default=True)
+    first_name = fields.Char('First Name', required=True)
+    last_name = fields.Char('Last Name', required=True)
+    full_name = fields.Char('Full Name', compute='_compute_full_name')
+    email = fields.Char('Email', required=True)
+    phone_number = fields.Char('Phone Number', required=True)
+    hire_date = fields.Date('Hire Date', required=True)
+    job_id = fields.Many2one("newhr.jobs", string='Job', required=True)
+    salary = fields.Float('Salary', required=True)
+    commission_pct = fields.Float('Commission Percentage')
+    manager_id = fields.Many2one('newhr.employees', string='Manager')
+    department_id = fields.Many2one('newhr.departments', string='Department')
+    photo = fields.Image('Photo', max_width=500, max_height=500)
+    job_history_id = fields.One2many('newhr.jobs_history', 'employee_id', string='Job History')
+    absences_id = fields.One2many('newhr.absences', 'employee_id')
+    ent_holidays_id = fields.One2many('newhr.ent_holidays', 'employee_id')
+    hierarchy_string = fields.Html(
+        string='Management Hierarchy',
+        compute='_compute_hierarchy_string',
+        sanitize=False,
+    )
+    child_ids = fields.One2many('newhr.employees', 'manager_id', string='Subordinates')
+    subordinates_string = fields.Html(
+        string='Subordinates',
+        compute='_compute_subordinates_string',
+        sanitize=False,
+    )
+
+    @api.constrains('salary', 'job_id.min_salary', 'job_id.max_salary')
+    def _check_salary(self):
+        for record in self:
+            if record.salary < record.job_id.min_salary or record.salary > record.job_id.max_salary:
+                raise ValidationError("The salary must be between the min and max salaries defined for the job.")
+
+    @api.depends('first_name', 'last_name')
+    def _compute_full_name(self):
+        for record in self:
+            record.full_name = f"{record.first_name} {record.last_name}".strip()
+
+    @api.depends('full_name', 'manager_id', 'manager_id.manager_id', 'manager_id.manager_id.manager_id',
+                 'manager_id.manager_id.manager_id.manager_id', )
+    def _compute_hierarchy_string(self):
+        action = self.env.ref('newhr.newhr_employees_action')
+        for employee in self:
+            employee.hierarchy_string = Markup(
+                '<ul class="oe_hierarchy_tree">{}</ul>'
+            ).format(employee._build_hierarchy_li('up', 0, action))
+
+    @api.depends('full_name', 'child_ids.full_name', 'child_ids.child_ids.full_name',
+                 'child_ids.child_ids.child_ids.full_name', 'child_ids.child_ids.child_ids.child_ids.full_name', )
+    def _compute_subordinates_string(self):
+        action = self.env.ref('newhr.newhr_employees_action')
+        for employee in self:
+            employee.subordinates_string = Markup(
+                '<ul class="oe_hierarchy_tree" style="position:relative;">{}</ul>'
+            ).format(employee._build_hierarchy_li('down', 0, action))
+
+    def _build_hierarchy_li(self, direction, level, action):
+        self.ensure_one()
+        related = self.child_ids if direction == 'down' else self.manager_id
+
+        html = Markup('<li>')
+        if related:
+            onclick = (
+                "this.classList.toggle('caret-down');"
+                "this.parentElement.querySelector(':scope > ul.nested')"
+                ".classList.toggle('active')"
+            )
+            html += Markup('<span class="caret" onclick="{}"></span>').format(onclick)
+
+        if level > 0 and direction == 'up':
+            html += Markup('reports to ')
+
+        url = f"/odoo/action-{action.id}/{self.id}"
+        html += Markup(
+            '<span class="listname"><a href="{}">{}<span style="font-size:75%;"> -- {} -- {}</span></a></span>').format(
+            url, self.full_name, self.job_id.job_title, self.department_id.department_name
+        )
+
+        if related:
+            html += Markup('<ul class="nested">')
+            for rel in related:
+                html += rel._build_hierarchy_li(direction, level + 1, action)
+            html += Markup('</ul>')
+
+        html += Markup('</li>')
+        return html
+
+    def write(self, vals: ValuesType) -> typing.Literal[True]:
+        tracked_fields = {"job_id", "department_id"}
+        if tracked_fields.intersection(vals.keys()):
+            old_values = {emp.id: (emp.job_id.id, emp.department_id.id) for emp in self}
+            result = super().write(vals)
+            for emp in self:
+                old_job_id, old_department_id = old_values[emp.id]
+                if old_job_id != emp.job_id.id or old_department_id != emp.department_id.id:
+                    emp._create_job_history_record(old_job_id, old_department_id)
+            return result
+        return super().write(vals)
+
+    def _create_job_history_record(self, old_job_id, old_department_id):
+        self.ensure_one()
+        today = fields.Date.context_today(self)
+
+        last_history = self.env['nhr.job_history'].search([
+            ('employee_id', '=', self.id),
+        ], order='end_date desc', limit=1)
+
+        if last_history:
+            # start_date = last_history.end_date + timedelta(days=1)
+            start_date = last_history.end_date
+        else:
+            start_date = self.hire_date
+
+        self.env['nhr.job_history'].create({
+            "employee_id": self.id,
+            "job_id": old_job_id,
+            "department_id": old_department_id,
+            "start_date": start_date,
+            "end_date": today,
+        })

@@ -2,15 +2,36 @@
     <data>
         <menuitem id="newhr_root_menu"
                   name="New Human Resources"
-                  sequence="1"/>
+                  sequence="1"
+                  web_icon="newhr,static/description/icon.png"/>
         <menuitem id="newhr_general_menu"
                   name="General"
                   parent="newhr_root_menu"
-                  sequence="34"/>
+                  sequence="19"/>
         <menuitem id="newhr_regions_menu"
                   name="Regions"
                   parent="newhr_general_menu"
                   action="newhr_regions_action"
-                  sequence="37"/>
+                  sequence="21"/>
+        <menuitem id="newhr_public_holidays_menu"
+                  name="Public Holidays"
+                  parent="newhr_general_menu"
+                  action="newhr_public_holidays_action"
+                  sequence="22"/>
+        <menuitem id="newhr_absence_types_menu"
+                  name="Absence Types"
+                  parent="newhr_general_menu"
+                  action="newhr_absence_types_action"
+                  sequence="22"/>
+        <menuitem id="newhr_locations_menu"
+                  name="Locations"
+                  parent="newhr_root_menu"
+                  action="newhr_locations_action"
+                  sequence="18"/>
+        <menuitem id="newhr_jobs_menu"
+                  name="Jobs"
+                  parent="newhr_root_menu"
+                  action="newhr_jobs_action"
+                  sequence="17"/>
     </data>
 </odoo>

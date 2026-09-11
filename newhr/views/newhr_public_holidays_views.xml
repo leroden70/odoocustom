@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="newhr_public_holidays_view_list" model="ir.ui.view">
+        <field name="name">newhr.public_holidays.list</field>
+        <field name="model">newhr.public_holidays</field>
+        <field name="arch" type="xml">
+            <list string="Public Holidays">
+                <field name="country_id"/>
+                <field name="holiday_date"/>
+                <field name="holiday_description"/>
+            </list>
+        </field>
+    </record>
+    <record id="newhr_public_holidays_view_form" model="ir.ui.view">
+        <field name="name">newhr.public_holidays.form</field>
+        <field name="model">newhr.public_holidays</field>
+        <field name="arch" type="xml">
+            <form string="Public Holiday">
+                <sheet>
+                    <group>
+                        <field name="country_id"/>
+                        <field name="holiday_date"/>
+                        <field name="holiday_description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="newhr_public_holidays_action" model="ir.actions.act_window">
+        <field name="name">Public Holidays</field>
+        <field name="res_model">newhr.public_holidays</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

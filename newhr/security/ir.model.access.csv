@@ -1,1 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_newhr_regions,access_newhr_regions,model_newhr_regions,base.group_user,1,1,1,1
+access_newhr_public_holidays,access_newhr_public_holidays,model_newhr_public_holidays,base.group_user,1,1,1,1
+access_newhr_absence_types,access_newhr_absence_types,model_newhr_absence_types,base.group_user,1,1,1,1
+access_newhr_locations,access_newhr_locations,model_newhr_locations,base.group_user,1,1,1,1
+access_newhr_jobs,access_newhr_jobs,model_newhr_jobs,base.group_user,1,1,1,1
+

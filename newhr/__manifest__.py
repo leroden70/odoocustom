@@ -20,17 +20,18 @@ To manage employees, jobs, departments, absences, etc.
         # 'security/ir.model.access.csv',
         'security/ir.model.access.csv',
         # 'views/newhr_employees_views.xml',
-        # 'views/newhr_absence_types_views.xml',
+        'views/newhr_absence_types_views.xml',
         # 'views/newhr_absences_views.xml',
         # 'views/newhr_departments_views.xml',
         # 'views/newhr_ent_holidays_views.xml',
         # 'views/newhr_job_history_views.xml',
-        # 'views/newhr_jobs_views.xml',
-        # 'views/newhr_locations_views.xml',
-        # 'views/newhr_public_holidays_views.xml',
+        'views/newhr_jobs_views.xml',
+        'views/newhr_locations_views.xml',
+        'views/newhr_public_holidays_views.xml',
         'views/newhr_regions_views.xml',
         'views/newhr_menus.xml',
         # 'data/newhr_public_holidays_data.csv'
+        'data/newhr_regions.csv'
     ],
     # only loaded in demonstration mode
     'demo': [
@@ -38,7 +39,7 @@ To manage employees, jobs, departments, absences, etc.
     ],
     'assets': {
         'web.assets_backend': [
-            'nhr/static/src/css/newhr_hierarchy.css',
+            # 'newhr/static/src/css/newhr_hierarchy.css',
         ],
     },
     'license': 'LGPL-3',

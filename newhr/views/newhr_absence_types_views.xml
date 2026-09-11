@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="newhr_absence_types_view_list" model="ir.ui.view">
+        <field name="name">newhr.absence_types.list</field>
+        <field name="model">newhr.absence_types</field>
+        <field name="arch" type="xml">
+            <list string="Absence Types">
+                <field name="absence_type"/>
+                <field name="absence_description"/>
+            </list>
+        </field>
+    </record>
+    <record id="newhr_absence_types_view_form" model="ir.ui.view">
+        <field name="name">newhr.absence_types.form</field>
+        <field name="model">newhr.absence_types</field>
+        <field name="arch" type="xml">
+            <form string="Absence Type">
+                <sheet>
+                    <group>
+                        <field name="absence_type"/>
+                        <field name="absence_description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="newhr_absence_types_action" model="ir.actions.act_window">
+        <field name="name">Absence Types</field>
+        <field name="res_model">newhr.absence_types</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>
